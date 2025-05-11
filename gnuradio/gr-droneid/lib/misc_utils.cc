@@ -50,7 +50,8 @@ std::vector<std::complex<float>> misc_utils::create_zc_sequence(const double sam
         // Doing the arith below in double precision and then casting down to a float.  Using floats the whole
         // way will result in an output that's very far off from the MATLAB implementation.  The errors will accumulate
         // down the vector
-        sequence[left_guards + idx] = std::exp(std::complex<double>(0, -1.0) * (M_PIf64 * (double)root * (double)idx * (double)(idx + 1) / 601.0));
+        double scalar_part = M_PIf64 * (double)root * (double)idx * (double)(idx + 1) / 601.0;
+        sequence[left_guards + idx] = std::exp(std::complex<double>(0, -scalar_part));
     }
 
     // Null out the DC carrier
